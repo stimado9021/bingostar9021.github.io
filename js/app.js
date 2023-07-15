@@ -8,6 +8,8 @@ const ball6 = document.querySelector(".ball6");
 const ball7 = document.querySelector(".ball7");
 const ball8 = document.querySelector(".ball8");
 const ball9 = document.querySelector(".ball9");
+
+const esferasLista = [];
 // var bolaSale  = document.createElement("div");
 // bolaSale.innerText="55"; 
 // bolaSale.className = "ballSale";
@@ -19,6 +21,7 @@ const ball9 = document.querySelector(".ball9");
 
 window.addEventListener('load', function() {
   contBolas=0;
+  
     ball1.innerHTML=Math.floor(Math.random()*75);
     ball2.innerHTML=Math.floor(Math.random()*75);
     ball3.innerHTML=Math.floor(Math.random()*75);
@@ -106,18 +109,41 @@ function sacarBola(){
      audio.play();
 }
 
+function repetidos(n){
+  var nroRepe = esferasLista.includes(n);
+  console.log(n)
+  console.log(nroRepe)
+  if (nroRepe==false){
+    esferasLista .push(n);
+    return nroRepe;
+  }else{
+    return nroRepe;
+  }
+ 
+}
+
 
 function mostrarBola(){
-  const n = Math.floor(Math.random()*75)
+
+do{
+  var hallado=false;
+    var n = Math.floor(Math.random()*75) 
+      hallado=repetidos(n);
+      if(n==0){hallado=true}
+}while(hallado==true)
+console.log(esferasLista)
+
+
+  
   var celdas = document.getElementsByTagName("td");
  
   // for (var i = 0; i < 15; i++) { 
     for (var j = 0; j < celdas.length; j++) {
       
       var nro = celdas[j].innerHTML;
-      console.log(n + "  " + nro)
+      
        if(n===Number(nro)){
-        console.log(celdas[j].innerHTML)
+        
         celdas[j].style.color = "red";  
       }                      
     }
