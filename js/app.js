@@ -19,64 +19,69 @@ const esferasLista = [];
 // let updown = Math,floor(Math.random()*2);
 // let up = updown?true:false;
 
-window.addEventListener('load', function() {
+function crearBolas(){
   contBolas=0;
-  
-    ball1.innerHTML=Math.floor(Math.random()*75);
-    ball2.innerHTML=Math.floor(Math.random()*75);
-    ball3.innerHTML=Math.floor(Math.random()*75);
-    ball4.innerHTML=Math.floor(Math.random()*75);
-    ball5.innerHTML=Math.floor(Math.random()*75);
-    ball6.innerHTML=Math.floor(Math.random()*75);
-    ball7.innerHTML=Math.floor(Math.random()*75);
-    ball8.innerHTML=Math.floor(Math.random()*75);
-    ball9.innerHTML=Math.floor(Math.random()*75);
+  ball1.innerHTML=Math.floor(Math.random()*75);
+  ball2.innerHTML=Math.floor(Math.random()*75);
+  ball3.innerHTML=Math.floor(Math.random()*75);
+  ball4.innerHTML=Math.floor(Math.random()*75);
+  ball5.innerHTML=Math.floor(Math.random()*75);
+  ball6.innerHTML=Math.floor(Math.random()*75);
+  ball7.innerHTML=Math.floor(Math.random()*75);
+  ball8.innerHTML=Math.floor(Math.random()*75);
+  ball9.innerHTML=Math.floor(Math.random()*75);
 
-    //**************************************************************************************** */
-    var body = document.getElementById("cajaTabla")
+  //**************************************************************************************** */
+  var body = document.getElementById("cajaTabla")
 
-    // Crea un elemento <table> y un elemento <tbody>
-    var tabla   = document.createElement("table");
-    var tblBody = document.createElement("tbody");
-  
-    // Crea las celdas
-    for (var i = 0; i < 15; i++) {
-      // Crea las hileras de la tabla
-      var hilera = document.createElement("tr");
-   var cont=0;
-   var nro=i+1;
-      for (var j = 0; j < 5; j++) {
-        // Crea un elemento <td> y un nodo de texto, haz que el nodo de
-        // texto sea el contenido de <td>, ubica el elemento <td> al final
-        // de la hilera de la tabla
-        var celda = document.createElement("td");
-        if(cont!=0){nro=nro+15}
-        var textoCelda = document.createTextNode(nro);
-        celda.appendChild(textoCelda);
-        celda.style.textAlign = "center";
-        celda.style.color = "white";
-        hilera.appendChild(celda);
-        cont++;
-      }
-  
-      // agrega la hilera al final de la tabla (al final del elemento tblbody)
-      tblBody.appendChild(hilera);
+  // Crea un elemento <table> y un elemento <tbody>
+  var tabla   = document.createElement("table");
+  var tblBody = document.createElement("tbody");
+
+  // Crea las celdas
+  for (var i = 0; i < 15; i++) {
+    // Crea las hileras de la tabla
+    var hilera = document.createElement("tr");
+ var cont=0;
+ var nro=i+1;
+    for (var j = 0; j < 5; j++) {
+      // Crea un elemento <td> y un nodo de texto, haz que el nodo de
+      // texto sea el contenido de <td>, ubica el elemento <td> al final
+      // de la hilera de la tabla
+      var celda = document.createElement("td");
+      if(cont!=0){nro=nro+15}
+      var textoCelda = document.createTextNode(nro);
+      celda.appendChild(textoCelda);
+      celda.style.textAlign = "center";
+      celda.style.color = "white";
+      hilera.appendChild(celda);
+      cont++;
     }
+
+    // agrega la hilera al final de la tabla (al final del elemento tblbody)
+    tblBody.appendChild(hilera);
+  }
+
+  // posiciona el <tbody> debajo del elemento <table>
+  tabla.appendChild(tblBody);
+  // appends <table> into <body>
+  body.appendChild(tabla);
+  // modifica el atributo "border" de la tabla y lo fija a "2";
+  tabla.setAttribute("border", "2");
+  tabla.setAttribute("border-color", "white");
+  tabla.setAttribute("width", "100%");
+  tabla.setAttribute("height", "100%");
+
+  tblBody.setAttribute("font-size", "40%");
+  tblBody.setAttribute("color", "red");
+
+ 
+}
+
+window.addEventListener('load', function() {
   
-    // posiciona el <tbody> debajo del elemento <table>
-    tabla.appendChild(tblBody);
-    // appends <table> into <body>
-    body.appendChild(tabla);
-    // modifica el atributo "border" de la tabla y lo fija a "2";
-    tabla.setAttribute("border", "2");
-    tabla.setAttribute("border-color", "white");
-    tabla.setAttribute("width", "100%");
-    tabla.setAttribute("height", "100%");
-
-    tblBody.setAttribute("font-size", "40%");
-    tblBody.setAttribute("color", "red");
-
-   
+  crearBolas()
+  
 
    //**************************************************************************************** */
 
@@ -86,6 +91,9 @@ function sacarBola(){
     var c = 0;
     btnSacarBola.disabled=true;
     btnSacarBola.style.background="red";
+
+    btnReiniciar.disabled=true;
+    btnReiniciar.style.background="red";
   const id =  setInterval(() => {
     ball1.innerHTML=Math.floor(Math.random()*75);
     ball2.innerHTML=Math.floor(Math.random()*75);
@@ -171,6 +179,8 @@ setTimeout(() => {
   bolaSale.style.left=10;
   btnSacarBola.style.background="green";
   btnSacarBola.disabled=false;
+  btnReiniciar.disabled=false;
+ btnReiniciar.style.background="blue";
   const nroFijo=document.createElement("div")
   nroFijo.textContent=n;
   nroFijo.setAttribute("class","bolaFija2")
@@ -215,8 +225,13 @@ function  cantarNumero(n){
   if(n>= 61 && n<=75){
     const audio = new Audio("mp3s/o" + n + ".mp3");
     audio.play();
+  }     
+}
+
+function reinicarJuego(){
+const msg = confirm("¿Esta seguro q desea reiniciar el juego?");
+  if(msg){
+    alert('El juego se Reiniciara. Presione Aceptar')
+    window.location.replace('index.html')
   }
- 
-  
-  
 }
